@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horários de Alimentação</title>
+</head>
+<body>
+    <h1>Horários de Alimentação</h1>
+    <div id="horarios"></div>
+
+    <script>
+        // Função para fazer a requisição à API e exibir os horários na página
+        function carregarHorarios() {
+            fetch('http://192.168.100.102/dog/getinfo/get') // Altere 'api.php' para o caminho do seu arquivo PHP
+            .then(response => response.json())
+            .then(data => {
+                const horariosDiv = document.getElementById('horarios');
+                for (const horario in data) {
+                    if (data[horario] !== null) {
+                        horariosDiv.innerHTML += `<p><strong>${horario}:</strong> ${data[horario].hora}:${data[horario].minuto}</p>`;
+                    } else {
+                        horariosDiv.innerHTML += `<p><strong>${horario}:</strong> Não registrado</p>`;
+                    }
+                }
+            })
+            .catch(error => console.error('Erro ao carregar os horários:', error));
+        }
+
+        // Chamar a função ao carregar a página
+        carregarHorarios();
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Estado</title>
+</head>
+<body>
+  <h1>Controle de Estado</h1>
+  
+  <button id="ligar" value="0">Ligar</button>
+  <button id="desligar" value="1">Desligar</button>
+
+  <script>
+    // Função para enviar o estado ao PHP
+    function enviarEstado(estado) {
+      // Cria um objeto JavaScript com o estado
+      var jsonData = { "estado": estado };
+
+      // Converte o objeto JavaScript para JSON
+      var jsonString = JSON.stringify(jsonData);
+
+      // Cria uma instância de XMLHttpRequest
+      var xhr = new XMLHttpRequest();
+      
+      // Define a URL e o método de requisição
+      xhr.open("POST", "http://192.168.100.102/dog/motor/postestadomotor", true);
+
+      // Configura o cabeçalho da requisição
+      xhr.setRequestHeader("Content-type", "application/json");
+
+      // Define a função a ser chamada quando a resposta for recebida
+      xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          // Exibe a resposta do servidor
+          console.log(this.responseText);
+        }
+      };
+
+      // Envia a requisição com o JSON como corpo da requisição
+      xhr.send(jsonString);
+    }
+
+    // Adiciona um evento de clique ao botão "Ligar"
+    document.getElementById("ligar").addEventListener("click", function() {
+      enviarEstado(this.value); // Envia o estado do botão ao PHP
+    });
+
+    // Adiciona um evento de clique ao botão "Desligar"
+    document.getElementById("desligar").addEventListener("click", function() {
+      enviarEstado(this.value); // Envia o estado do botão ao PHP
+    });
+  </script>
+</body>
+</html>

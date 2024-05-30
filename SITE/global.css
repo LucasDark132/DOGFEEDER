@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  line-height: normal;
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  min-height: 100vh; /* Garante que o corpo ocupe pelo menos a altura da janela de visualização */
+}
+
+:root {
+  /* fonts */
+  --font-manrope: Manrope;
+
+  /* font sizes */
+  --font-size-lgi-8: 19.8px;
+  --font-size-mini: 15px;
+  --font-size-mid-6: 17.6px;
+  --font-size-13xl: 32px;
+  --font-size-5xl: 24px;
+  --font-size-smi: 13px;
+
+  /* Colors */
+  --color-gray: #171717;
+  --white-100: #fff;
+  --color-cornflowerblue: rgba(125, 171, 240, 0.3);
+  --color-limegreen: rgba(88, 188, 24, 0.3);
+
+  /* Gaps */
+  --gap-4xs: 9px;
+  --gap-10xl: 29px;
+  --gap-6xs: 7px;
+
+  /* Paddings */
+  --padding-xl: 20px;
+  --padding-5xl: 24px;
+  --padding-20xl: 39px;
+  --padding-73xl: 92px;
+  --padding-14xl: 33px;
+  --padding-mid: 17px;
+  --padding-lgi: 19px;
+  --padding-49xl: 68px;
+  --padding-51xl: 70px;
+  --padding-15xl: 34px;
+  --padding-3xs: 10px;
+  --padding-lg: 18px;
+  --padding-3xl: 22px;
+  --padding-base-4: 15.4px;
+  --padding-19xl: 38px;
+  --padding-8xl: 27px;
+  --padding-smi: 13px;
+
+  /* Border radiuses */
+  --br-11xl: 30px;
+  --br-21xl: 40px;
+  --br-5xl-2: 24.2px;
+}

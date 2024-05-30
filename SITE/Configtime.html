@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./c-o-n-f-i-g-t-i-m-e.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;700;800&display=swap"
+    />
+  </head>
+  <body>
+    <div class="config-time">
+      <section class="config-time-child"></section>
+      <section class="dog-care">
+        <div class="dog-info">
+          <div class="dog-fedder-container">
+            <b class="dog-fedder1">DOG FEDDER</b>
+          </div>
+          <div class="love-care">
+            <div class="love-icon"></div>
+            <p class="take-care-of1">Take care of those who love you</p>
+          </div>
+        </div>
+      </section>
+      <section class="configuration">
+        <div class="time-setting">
+          <div class="time-picker">
+            <div class="rectangle-parent">
+              <div class="frame-item"></div>
+              <div class="set-time-group">
+                <b class="set-time1">Set time</b>
+                <div class="configure-three-feeding">
+                  configure three feeding times
+                </div>
+              </div>
+              <div class="file-icon">
+                <img
+                  class="file-1-1"
+                  loading="lazy"
+                  alt=""
+                  src="./public/file-1-1@2x.png"
+                />
+              </div>
+            </div>
+            <div class="time-preview">
+              <div class="time-display">
+                <div class="rectangle-group">
+                  <div class="frame-inner"></div>
+                  <div class="clock-container">
+                   
+                  </div>
+                  <input
+                    class="set-time2" id="hora1"
+                    placeholder="Set time"
+                    type="time"
+                  />
+                </div>
+                <div class="rectangle-container">
+                  <div class="rectangle-div"></div>
+                  <div class="relogio-2-wrapper">
+                    
+                  </div>
+                  <input
+                    class="set-time3" id="hora2"
+                    placeholder="Set time"
+                    type="time"
+                  />
+                </div>
+              </div>
+              <div class="group-div">
+                <div class="frame-child1"></div>
+                <div class="manual-clock">
+                  
+                </div>
+                <input
+                  class="set-time4" id="hora3"
+                  placeholder="Set time"
+                  type="time"
+                />
+              </div>
+            </div>
+          </div>
+          <button class="enter-button" id="submit">
+            <b class="enter">Cadastrar</b>
+          </button>
+        </div>
+        <div class="rectangle-parent1">
+          <div class="frame-child2"></div>
+          <div class="feeding-header">
+            <b class="configure-the-feeding">Configure the feeding time</b>
+            <div class="amount-info">
+              <div class="amount-of-feed">Amount of feed spilled</div>
+            </div>
+          </div>
+          <div class="feeding-time">
+            <div class="time-input">
+              <div class="time-input-child"></div>
+              <input
+                class="feeding-time1" id="feeding-time1"
+                placeholder="feeding time"
+                type="number"
+              />
+            </div>
+            <div class="set-button">
+              <div class="set-action">
+                <button class="set" id="configtimefeed">Set</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="home-navigation">
+        <div class="home-button">
+          <div class="back-to-home1">Back to home</div>
+          <div class="home-icon1" id="homeIconContainer">
+            <div class="casa-1-2"></div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </body>
+  
+  <script>
+    var homeIconContainer = document.getElementById("homeIconContainer");
+    if (homeIconContainer) {
+      homeIconContainer.addEventListener("click", function (e) {
+        window.location.href = "./Menu.html";
+      });
+    }
+
+    var submit = document.getElementById("submit");
+    if (submit) {
+      submit.addEventListener("click", function (e) {
+        const hora1 = document.getElementById('hora1').value;
+        const hora2 = document.getElementById('hora2').value;
+        const hora3 = document.getElementById('hora3').value;
+
+        // Verifica se algum dos campos está vazio
+        if (!hora1 || !hora2 || !hora3) {
+            //document.getElementById('error').innerText = 'Por favor, preencha todos os campos de horário.';
+            return;
+        }
+
+        const hora1Minutos = horaParaMinutos(hora1);
+        const hora2Minutos = horaParaMinutos(hora2);
+        const hora3Minutos = horaParaMinutos(hora3);
+
+        // Verifica se os horários estão em ordem crescente
+        if (hora2Minutos <= hora1Minutos || hora3Minutos <= hora2Minutos) {
+            //document.getElementById('error').innerText = 'Por favor, verifique os horários. O horário 2 deve ser posterior ao horário 1, e o horário 3 deve ser posterior ao horário 2.';
+            return;
+        }
+
+        const data = {
+            horario1: { hora: parseInt(hora1.split(':')[0]), minuto: parseInt(hora1.split(':')[1]) },
+            horario2: { hora: parseInt(hora2.split(':')[0]), minuto: parseInt(hora2.split(':')[1]) },
+            horario3: { hora: parseInt(hora3.split(':')[0]), minuto: parseInt(hora3.split(':')[1]) }
+        };
+
+        fetch('http://192.168.100.103/dog/insertinfo/insertdata', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Clear input fields after successful submission
+            document.getElementById('hora1').value = "";
+            document.getElementById('hora2').value = "";
+            document.getElementById('hora3').value = "";
+
+            //document.getElementById('error').innerText = ''; // Limpa o erro
+            //document.getElementById('response').innerText = data.message;
+            //carregarHorarios(); // Recarrega os horários
+            alert("Dados incluídos com sucesso!");
+        })
+        .catch(error => {
+            console.error('Erro ao cadastrar horários:', error);
+           // document.getElementById('error').innerText = 'Erro ao cadastrar horários. Por favor, tente novamente mais tarde.';
+        });
+      });
+    }
+
+    function horaParaMinutos(hora) {
+    const [horas, minutos] = hora.split(':').map(Number);
+    return horas * 60 + minutos;
+    }
+    
+
+    function enviarEstado(tempoalimentacao) {
+    // Cria um objeto JavaScript com o estado
+    var jsonData = { "tempoalimentacao": tempoalimentacao };
+
+    // Converte o objeto JavaScript para JSON
+    var jsonString = JSON.stringify(jsonData);
+
+    // Cria uma instância de XMLHttpRequest
+    var xhr = new XMLHttpRequest();
+    
+    // Define a URL e o método de requisição
+    xhr.open("POST", "http://192.168.100.103/dog/tempoalimentacao/inserttempoalimentacao", true);
+
+    // Configura o cabeçalho da requisição
+    xhr.setRequestHeader("Content-type", "application/json");
+
+    // Define a função a ser chamada quando a resposta for recebida
+    xhr.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        // Exibe a resposta do servidor
+        console.log(this.responseText);
+      }
+    };
+
+    // Envia a requisição com o JSON como corpo da requisição
+    xhr.send(jsonString);
+  }
+
+  // Adiciona um evento de clique ao botão "Ligar"
+  document.getElementById("configtimefeed").addEventListener("click", function() {
+    var tempo = parseInt(document.getElementById("feeding-time1").value)
+    enviarEstado(tempo); // Envia o estado do botão ao PHP
+  });
+
+ 
+
+
+
+
+    
+
+  </script>
+</html>

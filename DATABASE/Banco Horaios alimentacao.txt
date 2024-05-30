@@ -1,0 +1,32 @@
+-- Criando o banco de dados HorariosDeAlimentacao
+CREATE DATABASE HorariosDeAlimentacao;
+
+-- Usando o banco de dados recém-criado
+USE HorariosDeAlimentacao;
+
+-- Criando a tabela Horario1
+CREATE TABLE Horario1 (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    horaAlimentacao1 INT,
+    minutoAlimentacao1 INT
+);
+
+-- Criando a tabela Horario2
+CREATE TABLE Horario2 (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    horaAlimentacao2 INT,
+    minutoAlimentacao2 INT
+);
+
+-- Criando a tabela Horario3
+CREATE TABLE Horario3 (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    horaAlimentacao3 INT,
+    minutoAlimentacao3 INT
+
+-- Criando a tabela Horario3
+CREATE TABLE tempo (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    tempoalimentacao INT
+
+);
