@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
     <link rel="stylesheet" href="./global.css" />
-    <link rel="stylesheet" href="./t-e-l-a-m-e-n-u.css" />
+    <link rel="stylesheet" href="./menu.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;700;800&display=swap"
@@ -14,65 +14,70 @@
   <body>
     <div class="tela-menu">
       <section class="ellipse-parent">
-        <div class="frame-child"></div>
+        <div class="frame-item"></div>
         <div class="welcome-to"></div>
       </section>
       <section class="tela-menu-inner">
-        <div class="frame-parent">
+        <div class="frame-container">
           <div class="dog-fedder-wrapper">
-            <b class="dog-fedder">DOG FEDDER</b>
+            <b class="dog-fedder1">DOG FEDDER</b>
           </div>
-          <p class="take-care-of">Take care of those who love you</p>
+          <div class="take-care-of1">Take care of those who love you</div>
         </div>
       </section>
-      <section class="set-time-parent">
-        <div class="set-time" id="sETTIMEContainer">
-          <div class="time-setting-elements">
-            <div class="time-setting-elements-child"></div>
-            <div class="schedule-description">
-              <b class="register-schedules">Register schedules</b>
-            </div>
-            <div class="set-your-pets">Set your pet's feeding times</div>
-          </div>
-          <img
-            class="subtract-icon"
-            loading="lazy"
-            alt=""
-            src="./public/10@2x.png"
-          />
-        </div>
-        <div class="feed-now-option-wrapper" id="FeedNOWLIGAR" >
-          <div class="feed-now-option">
-            <div class="pricing"></div>
-            <div class="feed-now-description">
-              <div class="feed-anytime-option">
-                <a href="" class="feed-your-pet">Feed your pet at any time</a>
-                <img
-                  class="faq-icon"
-                  loading="lazy"
-                  alt=""
-                  src="./public/10-1@2x.png"
-                />
+      <section class="tela-menu-child">
+        <div class="frame-parent1">
+          <div class="feed-buttons-parent" id="feed-buttons-parent">
+            <div class="feed-buttons">
+              <div class="button-labels">
+                <b class="register-schedules">Register schedules</b>
+                <div class="set-your-pets">Set your pet's feeding times</div>
               </div>
             </div>
-            <b class="feed-now">Feed now</b>
+            <img
+              class="subtract-icon"
+              loading="lazy"
+              alt=""
+              src="./public/10@2x.png"
+            />
+          </div>
+          <div class="frame-parent2" id="frame-parent2">
+            <div class="frame-wrapper1">
+              <div class="feed-now-parent">
+                <b class="feed-now">Feed now</b>
+                <div class="feed-your-pet">Feed your pet at any time</div>
+              </div>
+            </div>
+            <img
+              class="faq-icon"
+              loading="lazy"
+              alt=""
+              src="./public/10-1@2x.png"
+            />
           </div>
         </div>
       </section>
-      <section class="back-to-home-parent" id="frameSection3">
-        <div class="back-to-home">Back to home</div>
-        <div class="home-icon">
-          <img
-            class="casa-1-1"
-            loading="lazy"
-            alt=""
-            src="./public/casa-1-1@2x.png"
-          />
+      <div class="tela-menu-item"></div>
+      <section class="home-container-wrapper">
+        <div class="home-container" id="home-container">
+          <div class="back-to-home1">Back to home</div>
+          <div class="casa-1-1-wrapper">
+            <img
+              class="casa-1-1"
+              loading="lazy"
+              alt=""
+              src="./public/casa-1-1@2x.png"
+            />
+          </div>
         </div>
-        <div class="login"></div>
+      </section>
+      <section class="vector-group">
+        <img class="frame-inner" alt="" src="./public/rectangle-3463382.svg" />
+
+        <div class="esp32-dogfeeder1">Esp32 - Dogfeeder - project 2024</div>
       </section>
     </div>
-
-    <script src="script.js"></script>
   </body>
+
+  <script src="script.js"></script>
 </html>

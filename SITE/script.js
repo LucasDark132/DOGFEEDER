@@ -1,23 +1,23 @@
-var sETTIMEContainer = document.getElementById("sETTIMEContainer");
-      if (sETTIMEContainer) {
-        sETTIMEContainer.addEventListener("click", function (e) {
-          window.location.href = "./Configtime.html";
-        });
-      }
-      
-      var frameSection3 = document.getElementById("frameSection3");
-      if (frameSection3) {
-        frameSection3.addEventListener("click", function (e) {
-          window.location.href = "index.html";
+var registerschedules = document.getElementById("feed-buttons-parent");
+      if (registerschedules) {
+        registerschedules.addEventListener("click", function (e) {
+          window.location.href = "./configure.html";
         });
       }
 
-      var FeedNOWLIGAR = document.getElementById("FeedNOWLIGAR");
-      if (FeedNOWLIGAR) {
-        FeedNOWLIGAR.addEventListener("click", function (e) {
-          enviarEstado(1); // Envia o valor "1" para a função enviarEstado
+      var homecontainer = document.getElementById("home-container");
+        if (homecontainer) {
+          homecontainer.addEventListener("click", function (e) {
+          window.location.href = "./index.html";
         });
-      }
+        }
+
+var frameparent2 = document.getElementById("frame-parent2");
+if (frameparent2) {
+  frameparent2.addEventListener("click", function (e) {
+    enviarEstado(1); // Envia o valor "1" para a função enviarEstado
+  });
+}
 
 
       function enviarEstado(estado) {
@@ -31,7 +31,7 @@ var sETTIMEContainer = document.getElementById("sETTIMEContainer");
     var xhr = new XMLHttpRequest();
     
     // Define a URL e o método de requisição
-    xhr.open("POST", "http://192.168.100.103/dog/motor/postestadomotor", true);
+    xhr.open("POST", "http://192.168.100.103:8080/dog/motor/postestadomotor", true);
 
     // Configura o cabeçalho da requisição
     xhr.setRequestHeader("Content-type", "application/json");
@@ -47,3 +47,4 @@ var sETTIMEContainer = document.getElementById("sETTIMEContainer");
     // Envia a requisição com o JSON como corpo da requisição
     xhr.send(jsonString);
 }
+
