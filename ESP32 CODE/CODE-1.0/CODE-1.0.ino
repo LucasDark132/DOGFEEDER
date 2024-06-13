@@ -14,7 +14,7 @@ const int daylightOffset_sec = 0;
 // Servidores post e get
 const char* serverName1 = "http://192.168.100.103:8080/dog/motor/estadomotor";
 const char* serverName2 = "http://192.168.100.103:8080/dog/getinfo/get";
-const char* serverName3 = "http://192.168.100.103:8080/dog/getinfo/get";
+const char* serverName3 = "http://192.168.100.103:8080/dog/tempoalimentacao/gettempoalimentacao.php";
 
 // Parâmetros da primeira alimentação
 int horaAlimentacao1 = 0, minutoAlimentacao1 = 0, demosComida1 = 0;
@@ -29,13 +29,14 @@ int horaAlimentacao3 = 0, minutoAlimentacao3 = 0, demosComida3 = 0;
 int horaAtual = 0;
 int minutoAtual = 0;
 
-const int ledPin = 5;
+const int ledPin = 12;
 int ledState = HIGH;
 
 unsigned long tempoAnterior = 0;
-unsigned long intervalo = 5000; // Tempo entre as piscadas do led 
+int intervalo = 5000; // tempo de alimenção
 
 String estado = "";
+String tempo;
 
 String obterEstado() {
   String estado = ""; // Inicializa a variável para armazenar o estado
@@ -70,25 +71,42 @@ String obterEstado() {
   return estado;
 }
 
-int TempoDeAlimentacao() {
-  int tempo; // Inicializa a variável para armazenar o estado
+int convertsectomills(int sec){
+  
+  int secconvert = sec *1000;
+  return secconvert; 
+
+}
+
+
+
+String obterTempoAlimentacao() {
+  String tempo = ""; // Inicializa a variável para armazenar o tempo de alimentação
 
   // Verifica a conexão WiFi
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
-    http.begin(serverName1);
+    http.begin(serverName3);
     int httpResponseCode = http.GET();
 
     if (httpResponseCode > 0) {
       String jsonResponse = http.getString();
+      Serial.println("Resposta da API: " + jsonResponse);
 
       StaticJsonDocument<512> doc;
       DeserializationError error = deserializeJson(doc, jsonResponse);
 
-      if (!error && doc.containsKey("estado")) {
-        estado = doc["estado"].as<String>(); // Obtém o estado do JSON
+      if (!error) {
+        // Verifica se a resposta é um array
+        if (doc.is<JsonArray>()) {
+          // Obtém o primeiro elemento do array
+          tempo = doc[0].as<String>();
+        } else {
+          Serial.println("O JSON recebido não é um array.");
+        }
       } else {
-        Serial.println("Falha ao analisar JSON ou chave 'estado' não encontrada.");
+        Serial.print("Erro ao analisar JSON: ");
+        Serial.println(error.c_str());
       }
     } else {
       Serial.print("Erro na requisição HTTP: ");
@@ -102,7 +120,6 @@ int TempoDeAlimentacao() {
 
   return tempo;
 }
-
 
 
 void getHorarios() {
@@ -201,11 +218,18 @@ void setup() {
   Serial.println("\nConectado ao WiFi");
 
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
+
+
+
 }
 
 void loop() {
   unsigned long tempoDoPrograma = millis();
   estado = obterEstado();
+  tempo = obterTempoAlimentacao();
+  int tempoint = tempo.toInt();
+  intervalo = convertsectomills(tempoint);
+
   updateLocalTime();
   getHorarios();
 
@@ -269,10 +293,10 @@ void loop() {
     Serial.print("HORA ATUAL:");
     Serial.println (horaAtual);
     Serial.print ("MINUTO ATUAL:");
-    Serial.println (minutoAtual); 
-   
-    
-
-
+    Serial.println (minutoAtual);
+    Serial.print ("Tempo Alimentacao:");
+    Serial.println (tempo); 
+    Serial.print ("Tempo Alimentacao em Mills:");
+    Serial.println (intervalo); 
 
 }

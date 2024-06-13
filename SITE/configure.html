@@ -21,7 +21,7 @@
             <div class="love">
               <div class="care">
                 <div class="fedder">
-                  <b class="dog-fedder">DOG FEDDER</b>
+                  <b class="dog-fedder">DOG FEEDER</b>
                 </div>
                 <div class="take-care-of">Take care of those who love you</div>
               </div>
@@ -139,6 +139,7 @@
         // Verifica se algum dos campos está vazio
         if (!hora1 || !hora2 || !hora3) {
             //document.getElementById('error').innerText = 'Por favor, preencha todos os campos de horário.';
+            alert("Por favor, preencha todos os campos de horário.");
             return;
         }
 
@@ -149,6 +150,7 @@
         // Verifica se os horários estão em ordem crescente
         if (hora2Minutos <= hora1Minutos || hora3Minutos <= hora2Minutos) {
             //document.getElementById('error').innerText = 'Por favor, verifique os horários. O horário 2 deve ser posterior ao horário 1, e o horário 3 deve ser posterior ao horário 2.';
+            alert("Por favor, verifique os horários. O horário 2 deve ser posterior ao horário 1, e o horário 3 deve ser posterior ao horário 2.");
             return;
         }
 
@@ -221,6 +223,12 @@
   // Adiciona um evento de clique ao botão "Ligar"
   document.getElementById("configtimefeed").addEventListener("click", function() {
     var tempo = parseInt(document.getElementById("feeding-time1").value)
+    if(tempo > 10){
+     alert("Informe um valor menor ou igual a 10");
+     document.getElementById('feeding-time1').value = "";
+     return
+     
+    }
     enviarEstado(tempo); // Envia o estado do botão ao PHP
     alert("Dados incluídos com sucesso!");
     document.getElementById('feeding-time1').value = "";
